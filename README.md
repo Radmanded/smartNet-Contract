@@ -2,10 +2,6 @@
 
 ## Getting access to Cisco APIs 
 
-# Pre-requsites
-
--  CCOID 
-
 
 <details>
 <summary><h2>User onboarding process</h2></summary>
