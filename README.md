@@ -1,11 +1,10 @@
 # SmartNet-Contract
 
-Creating a chatbot with the botkit template. Please ensure that you have all the Pre-reqs installed on your device. 
+## Getting access to Cisco APIs 
 
 # Pre-requsites
 
 -  CCOID 
--  
 
 
 <details>
@@ -22,6 +21,15 @@ Specific registered Cisco.com user accounts (representing the application develo
 An API user can be either:
 
 **A customer user** - an internal developer who is a member of the customer's organization, previously onboarded to the customer's SNTC portal by the org's Delegated Administrator (DA).
+  
+**What's a delegated administrator?**
+
+Note: This question is only applicable for Party-based APIs (example PSS API, EF API).
+Cisco Service Access Management (CSAM) enables external partners to self-administer role-based user access to various Cisco Service programs. Self-administration is based upon the concept of delegated administration. Access is first granted, by Cisco, to one trusted person at the Customer or Partner Company, who then assumes responsibility for assigning access privileges to the rest of the users at their company.
+
+You may already be using some other tool or process to manage CCO IDs for your users; however, CSAM is needed to perform these additional tasks before gaining access to the API Console:
+•Associating user(s) to a party
+•Assigning user(s) a role on the API Console
 
 **A partner user** - an external/non-customer developer, whose Cisco.com ID is a member of a SNTC Cisco reseller partner organization. The partner organization must have at least one valid SNTC contract with the delegating customer's organization.
 
@@ -48,12 +56,121 @@ Once the onboarding process is complete, the API user can access the Cisco API D
 
 <details>
 <summary><h2>API Library</h2></summary>
+  
+## Contracts and Coverage
+The Contracts API provides details about the contracts associated to the devices in a customer’s inventory. The Coverage API provides a list of all devices that are covered under the selected Cisco Contract number. If a device is not covered by a partner invoking the API, then information like contract number and other related API attributes are marked “confidential”.
 
-**EoX API (End of Life)**
+## Features
+The Contracts API provides the following features:
+
+Supports RESTful interface, using a RAML definition file.
+Supports JSON data format
+Includes web services that return:
+Contracts owned by customers or partners
+Devices that are covered by a Cisco Service contract belonging to the customer or partner.
+Devices in the inventory that are not covered by Cisco Service contract.  
+  
+## Contract Details
+The contract details API returns details about specific contracts owned by customers or partners for devices in the customer’s inventory.
+This API supports filtering, pagination, sorting and chunked transfer encoding. For more information, see General API Feature section for examples and features that allow you to optimize and manipulate the response.
+
+### API URL
+GET : https://apx.cisco.com/cs/api/v1/contracts/contract-details  
+  
+### Sample Request
+https://apx.cisco.com/cs/api/v1/contracts/contract-details?customerId=1234
+
+### Sample JSON Response
+  
+![image](https://user-images.githubusercontent.com/9085386/206316741-dc513793-a4fe-4f4e-bcc0-1b4d3cfabd22.png)
+  
+  
+  
+## Product Alerts
+Product Alerts API provides information on the latest product alerts for a given partner/customer/inventory. The End of Life (EoL) service provides access to Cisco EoL product data. Customers and partners can request Cisco EoL product information for both hardware and software using a combination of input parameters. The Field Notice and Security Advisory API provides information on hardware and software issues involving Cisco products.
+
+Features
+The Cisco Product Information API provides the following features:
+
+Supports RESTful interface, using a RAML definition file.
+Supports JSON data format
+Includes web services that return:
+Field Notice information for a specific device or set of devicess.
+Field Notice Bulletin details associated with a field notice.
+Hardware End of Life details for a specific hardware device or set of devices.
+Hardware Bulletins detail for the associated hardware device.
+Security Vulnerability information including the Common Vulnerability and Exposure (CVE) identifiers and Common Vulnerability Scoring System (CVSS) for devices associated with customer ID.
+Security Advisory bulletins detail for one or more security advisory IDs associated with the devices.
+System Software End of Life details for a specific hardware device or set of devices.
+System Software End of Life Bulletins detail for device(s) in the customer’s inventory
+
+## Hardware End Of Life API
+The Hardware End-of-Life API retrieves end of life details for a specific hardware device. All request parameters are optional other than “customerId”.
+
+If "neInstanceId" is not provided in the request, the response will contain end of life information for all devices in the customer’s inventory.
+
+This API supports filtering, pagination, sorting and chunked transfer encoding. For more information, see the General API Feature section for examples and features that allow you to optimize and manipulate the response.
+
+###  API URL
+GET : https://apx.cisco.com/cs/api/v1/product-alerts/hardware-eol
+  
+### Sample Request
+https://apx.cisco.com/cs/api/v1/product-alerts/hardware-eol?customerId=1234
+
+### Sample JSON Response  
+  
+![image](https://user-images.githubusercontent.com/9085386/206313991-0887a468-63d9-45dd-98ed-25c008dd28f7.png)
+  
+
+**More EOL APIs**
+- https://developer.cisco.com/docs/service-apis/#!product-alerts/features
+  
+### EoX API (End of Life)
 
 - https://developer.cisco.com/docs/support-apis/#!eox
+  
 
+## Security Advisory API
 
+The PSIRT API returns security vulnerability information including the Common Vulnerability and Exposure (CVE) identifiers and Common Vulnerability Scoring System (CVSS) for devices associated with customer ID. All request parameters are optional other than “customerId”.
+
+If device ID is not provided in the request, the response will contain security advisory information for all device IDs associated with the customer.
+
+This API supports filtering, pagination, sorting and chunked transfer encoding. For more information, see the General API Feature section for examples and features that allow you to optimize and manipulate the response.
+
+### API URL
+GET : https://apx.cisco.com/cs/api/v1/product-alerts/security-advisories
+  
+### Sample Request
+https://apx.cisco.com/cs/api/v1/product-alerts/security-advisories?customerId=1234
+
+### Sample JSON Response
+  
+![image](https://user-images.githubusercontent.com/9085386/206314708-bc48747d-1109-400c-af2f-3d0781e573c7.png)
+
+**More Security APIs**
+- https://developer.cisco.com/docs/service-apis/#!product-alerts/features
+  
+
+## Software End Of Life
+  
+The Software End-of-Life API returns system software end of life details for a specific hardware device. All request parameters are optional other than “customerId”.
+
+If "neInstanceId" is not provided in the request, the response will contain software end of life information for all devices in the inventory of the specified customer.
+
+This API supports filtering, pagination, sorting and chunked transfer encoding. For more information, see the General API Feature section for examples and features that allow you to optimize and manipulate the response.
+
+### API URL
+GET : https://apx.cisco.com/cs/api/v1/product-alerts/software-eol  
+  
+### Sample Request
+https://apx.cisco.com/cs/api/v1/product-alerts/software-eol?customerId=1234
+
+### Sample JSON Response  
+  
+![image](https://user-images.githubusercontent.com/9085386/206315596-127555a2-7a58-44f2-8e55-e0a31f84c8f6.png)
+  
+  
 </details>
 
 <details>
@@ -80,10 +197,69 @@ These credentials are secrets unique to the registered application, and must be 
 ## Oauth2 Instructions
 
 - https://apiconsole.cisco.com/docs/read/overview/Oauth_20_Topics
+  
+- https://tools.ietf.org/html/rfc6749  
 
 </details>
 
+<details>
+<summary><h2>Request API Access</h2></summary>
 
+1. Go to Developer portal
+https://anypoint.mulesoft.com/apiplatform/apx#/portals/organizations/ca3d7533-cd1f-4072-911c-70990d0b7804/apis/86204954/versions/6553043
+
+2. Search for API choosen from API Library
+
+![image](https://user-images.githubusercontent.com/9085386/206319964-fe918ff7-b06f-42b7-a9fb-00cc43b580cb.png)
+
+3. Choose API that matches your request
+  
+![image](https://user-images.githubusercontent.com/9085386/206320245-f5372102-f4ed-469c-9bc3-18dbf91a2708.png)
+  
+4. Request API Access
+  
+![image](https://user-images.githubusercontent.com/9085386/206320531-38e169fc-77c5-4cd7-a0c9-c99f1572f2f9.png)
+  
+<br>
+  
+![image](https://user-images.githubusercontent.com/9085386/206320951-6500058d-fca2-490d-94df-a23888f8facb.png)
+  
+<br>
+  
+![image](https://user-images.githubusercontent.com/9085386/206321110-92aed4b0-5d65-45b2-8f16-084a4297719c.png)
+  
+<br>
+
+5. Verify API
+  
+<br>
+  
+![image](https://user-images.githubusercontent.com/9085386/206321420-c2c6a2e9-cb8e-4aba-93f8-02ff855485fa.png)
+  
+  
+</details> 
+  
+
+<details>
+<summary><h2>API Testing Environment</h2></summary>
+  
+How do I run and test the "HelloWorld" API on the Cisco env using OAuth 2.0?
+
+The Hello API is a RESTful API built specifically to serve as the starting point for learning how to interact with APIs that are securely exposed through Cisco's API Console. APIs are protected using OAuth 2.0 standard. There are 3 steps involved to make a successful API call.
+
+Step 1: Register an Application to use the HelloWorld API
+Please refer to “How do I register an application for APIs?” (above)
+
+Step 2: Generate an Access Token
+Please refer to https://apiconsole.cisco.com/files/Token_Access.pdf
+Access tokens can be generated using this OAuth 2.0 Spec guide (token developer guide) based on the grant type you choose. Every Access Token is valid for 60 min. After 60 min the application will have to request a new access token.
+
+Step 3: Make an API request
+Make a https GET request to https://api.cisco.com/hello and Pass the Access Token from Step 2 as part of the Request header; e.g., Authorization: Bearer
+Functionally, the API concatenates the string "hello" to the single path parameter passed. If no path parameter is passed, it simply echoes back "Hello World".  
+  
+</details>
+  
 <details>
 <summary><h2>Guide to Enabling Partner Access to Service APIs</h2></summary>
 <br>
@@ -144,6 +320,8 @@ The DA can then follow the steps to Add New Users to the Portal and Assign Roles
 
 <details>
 <summary><h2>Support</h2></summary>
+
+- https://apiconsole.cisco.com/Support  
 
 - For Onboarding support questions please contact partner-integrations@cisco.com.
 
