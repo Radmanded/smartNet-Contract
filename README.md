@@ -202,7 +202,7 @@ These credentials are secrets unique to the registered application, and must be 
 <summary><h2>Request API Access</h2></summary>
 
 1. Go to Developer portal
-https://anypoint.mulesoft.com/apiplatform/apx#/portals/organizations/ca3d7533-cd1f-4072-911c-70990d0b7804/apis/86204954/versions/6553043
+https://anypoint.mulesoft.com/apiplatform/apx#/portals/
 
 2. Search for API choosen from API Library
 
