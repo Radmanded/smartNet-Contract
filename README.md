@@ -2,13 +2,16 @@
 
 ## Getting access to Cisco APIs 
 
-
 <details>
 <summary><h2>User onboarding process</h2></summary>
 
 **Overview**
 
 Cisco Services APIs are available only to Cisco Smart Net Total Care (SNTC) (https://www.cisco.com/c/m/en_us/customer-experience/support/smart-net-total-care.html) customers and their designated SNTC reseller Partners. Access is gated through a role-based process administered by the customer organization via the Cisco Services Access Management tool (https://cdceb.cloudapps.cisco.com/csam).
+
+**Email Cisco API team for onboarding**
+
+For Onboarding support questions please contact partner-integrations@cisco.com.
 
 **API users accounts**
 
