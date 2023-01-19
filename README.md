@@ -55,6 +55,9 @@ Once the onboarding process is complete, the API user can access the Cisco API D
 
 <details>
 <summary><h2>API Library</h2></summary>
+
+## Postman Resources
+https://developer.cisco.com/docs/support-apis/#!cisco-support-apis-wadl-files/cisco-support-apis-wadl-files
   
 ## Contracts and Coverage
 The Contracts API provides details about the contracts associated to the devices in a customer’s inventory. The Coverage API provides a list of all devices that are covered under the selected Cisco Contract number. If a device is not covered by a partner invoking the API, then information like contract number and other related API attributes are marked “confidential”.
